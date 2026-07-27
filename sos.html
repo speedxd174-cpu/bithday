@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Max Niraula</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: #0a0e27;
+            position: relative;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f0f1e 100%);
+            z-index: 0;
+        }
+
+        .background::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            animation: subtle-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes subtle-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        #fireworks-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+
+        .stars span {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #d4af37;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+        }
+
+        .stars span:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .stars span:nth-child(2) { top: 75%; left: 85%; animation-delay: 0.5s; }
+        .stars span:nth-child(3) { top: 30%; left: 90%; animation-delay: 1s; }
+        .stars span:nth-child(4) { top: 20%; left: 70%; animation-delay: 1.5s; }
+        .stars span:nth-child(5) { top: 85%; left: 25%; animation-delay: 0.3s; }
+        .stars span:nth-child(6) { top: 50%; left: 5%; animation-delay: 1.2s; }
+        .stars span:nth-child(7) { top: 60%; left: 80%; animation-delay: 0.7s; }
+        .stars span:nth-child(8) { top: 10%; left: 50%; animation-delay: 1.8s; }
+        .stars span:nth-child(9) { top: 90%; left: 15%; animation-delay: 0.4s; }
+        .stars span:nth-child(10) { top: 40%; left: 35%; animation-delay: 1.1s; }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .card {
+            position: relative;
+            width: 450px;
+            padding: 60px 45px;
+            text-align: center;
+            background: rgba(20, 20, 40, 0.7);
+            backdrop-filter: blur(25px);
+            border-radius: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 1px rgba(212, 175, 55, 0.2);
+            z-index: 10;
+            animation: float-elegant 4s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes float-elegant {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .card:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 1px rgba(212, 175, 55, 0.3),
+                        0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .card h3 {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fade-in-down 0.8s ease forwards;
+        }
+
+        .card h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 72px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            opacity: 0;
+            animation: fade-in-down 0.8s ease 0.2s forwards;
+        }
+
+        .card p {
+            color: #c0c0c0;
+            font-size: 16px;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fade-in-down 0.8s ease 0.4s forwards;
+        }
+
+        .signature {
+            color: #d4af37;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            animation: fade-in-up 0.8s ease 2s forwards;
+            text-transform: uppercase;
+        }
+
+        .signature::before {
+            content: "✨ ";
+        }
+
+        .signature::after {
+            content: " ✨";
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 14px 50px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            background: transparent;
+            color: #d4af37;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fade-in-down 0.8s ease 0.6s forwards;
+        }
+
+        button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #d4af37;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            color: #0a0e27;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6),
+                        inset 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes fade-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                max-width: 400px;
+                padding: 40px 30px;
+            }
+
+            .card h1 {
+                font-size: 52px;
+            }
+
+            .card p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 95%;
+                padding: 30px 20px;
+            }
+
+            .card h1 {
+                font-size: 42px;
+            }
+
+            .card h3 {
+                font-size: 16px;
+            }
+
+            button {
+                padding: 12px 35px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <canvas id="fireworks-canvas"></canvas>
+
+    <div class="stars">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="card">
+        <h3>🎉 Happy Birthday 🎉</h3>
+        <h1>Max Niraula</h1>
+        <p>
+            Wishing you endless happiness,<br>
+            good health, success,<br>
+            and unforgettable memories.<br>
+            May every dream you chase become reality.<br>
+            Have an amazing birthday!<br>
+            🎂✨❤️
+        </p>
+        <div class="signature">Happy Birthday from your friend Aashim Rai</div>
+        <button onclick="triggerFireworks()">🎁 Best Wishes</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 2;
+                this.speedX = (Math.random() - 0.5) * 10;
+                this.speedY = (Math.random() - 0.5) * 10 - 3;
+                this.opacity = 1;
+                this.color = this.randomGold();
+                this.life = Math.random() * 30 + 40;
+            }
+
+            randomGold() {
+                const golds = ['#d4af37', '#ffd700', '#ffed4e', '#daa520', '#f0e68c'];
+                return golds[Math.floor(Math.random() * golds.length)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.15;
+                this.life--;
+                this.opacity = this.life / 70;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.restore();
+            }
+        }
+
+        function createFireworks(x, y, count = 50) {
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function animateFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            if (particles.length > 0) {
+                requestAnimationFrame(animateFireworks);
+            }
+        }
+
+        function triggerFireworks() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            createFireworks(centerX, centerY, 80);
+            setTimeout(() => createFireworks(centerX - 150, centerY - 100, 60), 200);
+            setTimeout(() => createFireworks(centerX + 150, centerY - 100, 60), 400);
+            
+            animateFireworks();
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                triggerFireworks();
+            }, 3500);
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target !== document.querySelector('button')) {
+                createFireworks(e.clientX, e.clientY, 40);
+                animateFireworks();
+            }
+        });
+    </script>
+</body>
+</html>
